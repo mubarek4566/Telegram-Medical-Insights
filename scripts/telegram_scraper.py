@@ -15,7 +15,7 @@ phone_number = os.getenv("TELEGRAM_PHONE_NUMBER")
 client = TelegramClient("session", api_id, api_hash)
 
 channels = [
-    "Chemed",
+    "https://t.me/Chemed123",
     "https://t.me/lobelia4cosmetics",
     "https://t.me/tikvahpharma"
 ]
