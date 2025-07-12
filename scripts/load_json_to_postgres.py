@@ -60,6 +60,19 @@ def load_json_to_postgres(data_dir):
                 df = pd.DataFrame(records)
 
                 if not df.empty:
+                    # Convert DataFrame to Python-native types
+                    data_tuples = [
+                        (
+                            str(row["channel"]),
+                            int(row["message_id"]),
+                            str(row["text"]) if row["text"] else None,
+                            bool(row["has_media"]),
+                            str(row["media_type"]) if row["media_type"] else None,
+                            pd.to_datetime(row["date"]).to_pydatetime()
+                        )
+                        for _, row in df.iterrows()
+                    ]
+
                     with conn.cursor() as cur:
                         execute_values(
                             cur,
@@ -69,14 +82,14 @@ def load_json_to_postgres(data_dir):
                                 has_media, media_type, date
                             ) VALUES %s
                             """,
-                            df.to_records(index=False),
+                            data_tuples,
                             page_size=100
                         )
                     conn.commit()
-                    inserted_rows += len(df)
+                    inserted_rows += len(data_tuples)
 
     conn.close()
-    print(f"Done. Inserted {inserted_rows} rows into raw.telegram_messages.")
+    print(f"✅ Done. Inserted {inserted_rows} rows into raw.telegram_messages.")
 
 # Public function to be called externally (e.g., from Jupyter)
 def load_json_data_main(date_str=None):
