@@ -110,3 +110,30 @@ def load_json_data_main(date_str=None):
 # Optional CLI usage
 if __name__ == "__main__":
     load_json_data_main()
+
+def load_image_predictions(csv_path="detections/predictions.csv"):
+    conn = connect_db()
+    df = pd.read_csv(csv_path)
+
+    # Convert numpy types to native Python types
+    df = df.astype({
+        "message_id": str,
+        "detected_object_class": str,
+        "confidence_score": float,
+        "channel": str,
+        "image_path": str
+    })
+
+    # Convert to list of tuples
+    data = list(df.itertuples(index=False, name=None))
+
+    with conn.cursor() as cur:
+        execute_values(cur, """
+            INSERT INTO raw.image_detections (
+                message_id, detected_object_class, confidence_score, channel, image_path
+            ) VALUES %s
+        """, data)
+        conn.commit()
+        print(f"✅ Loaded {len(df)} detections into raw.image_detections")
+
+    conn.close()
