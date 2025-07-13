@@ -1,4 +1,12 @@
+
 version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: telegram_messages
+      - name: image_detections
 
 models:
   - name: stg_telegram_messages
@@ -20,3 +28,5 @@ models:
         tests:
           - not_null
 
+  - name: stg_image_detections
+    description: "Staging model for YOLOv8 image detection results"
