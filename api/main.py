@@ -16,3 +16,4 @@ def channel_activity(channel_id: str):
 @app.get("/api/search/messages", response_model=List[MessageSearchResult])
 def search(query: str, limit: int = 10):
     return search_messages(query=query, limit=limit)
+
