@@ -3,6 +3,7 @@
 with messages as (
     select
         {{ dbt_utils.generate_surrogate_key(['channel']) }} as channel_id,
+        channel,
         cast(message_id as integer) as message_id,
         cast(message_date as date) as message_date,
         has_media,
@@ -15,6 +16,7 @@ with messages as (
 select
     message_id,
     channel_id,
+    channel,
     message_date,
     has_media,
     has_image,
