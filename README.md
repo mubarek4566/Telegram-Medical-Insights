@@ -27,25 +27,25 @@ This Repository contains data pipeline from raw Telegram data to an analytical A
 telegram-medical-insights/
 ├── notebooks/
 
-│   └── ... (your Jupyter notebooks)
+    │   └── main.ipybn
 
 ├── scripts/
 
-│   ├── telegram_scraper.py
+    │   ├── telegram_scraper.py
 
-│   ├── load_json_to_postgres.py
+    │   ├── load_json_to_postgres.py
 
-│   ├── object_detection.py
+    │   ├── object_detection.py
 
-│   └── ... (other scripts)
+    │   └── ... (other scripts)
 
 ├── detections/
 
-│   └── predictions.csv
+    │   └── predictions.csv
 
 ├── data/
 
-│   └── images/
+    │   └── images/
 
 ├── dbt_project/
 
@@ -65,23 +65,23 @@ telegram-medical-insights/
 
 ├── fastapi_app/
 
-│   ├── main.py
+    │   ├── main.py
 
-│   ├── database.py
+    │   ├── database.py
 
-│   ├── models.py
+    │   ├── models.py
 
-│   ├── schemas.py
+    │   ├── schemas.py
 
-│   └── crud.py
+    │   └── crud.py
 
 ├── dagster_project/
 
-│   ├── pipeline.py         
+    │   ├── pipeline.py         
 
-│   ├── __init__.py
+    │   ├── __init__.py
 
-│   └── repository.py       
+    │   └── repository.py       
 
 ├── pyproject.toml / requirements.txt
 
