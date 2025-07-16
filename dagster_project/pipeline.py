@@ -1,6 +1,6 @@
 # dagster_project/pipeline.py
 
-from dagster import job, op, schedule, get_dagster_logger
+from dagster import job, op, schedule, get_dagster_logger, ScheduleDefinition
 import subprocess
 
 @op
@@ -43,13 +43,6 @@ def telegram_pipeline_job():
     run_dbt_transformations()
     run_yolo_enrichment()
 
-# Schedule: every day at 6 AM (Addis Ababa time)
-@schedule(
-    cron_schedule="0 6 * * *",
-    job=telegram_pipeline_job,
-    execution_timezone="Africa/Addis_Ababa",
-)
-def daily_telegram_pipeline_schedule():
 
 # ✅ Daily schedule at 6 AM
 daily_telegram_pipeline_schedule = ScheduleDefinition(
