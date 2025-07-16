@@ -39,13 +39,9 @@ telegram-medical-insights/
 
 │   └── ... (other scripts)
 
-├── detections/
-
-│   └── predictions.csv
-
 ├── data/
 
-│   └── images/
+    │   └── images/
 
 ├── dbt_project/
 
